@@ -43,33 +43,33 @@
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div onclick="openModal('Hijab Sport', 'Material jersey premium yang ringan dan menyerap keringat. Potongan ergonomis, tidak licin, dan sangat nyaman untuk workout.', 'Rp 40.000', 'Gak geser sama sekali pas lari pagi! - Sarah', 'images/hijab-sport.jpg')" class="product-card group cursor-pointer">
+            <div onclick="openModal('Hijab Sport', 'Material jersey premium yang ringan dan menyerap keringat. Potongan ergonomis, tidak licin, dan sangat nyaman untuk workout.', 'Rp 40.000', 'Gak geser sama sekali pas lari pagi! - Sarah', 'images/hijab-sport.jpeg')" class="product-card group cursor-pointer">
                 <div class="aspect-[3/4] rounded-3xl mb-6 overflow-hidden shadow-md bg-slate-200 border-4 border-white">
-                    <img src="images/hijab-sport.jpg" alt="Hijab Sport" class="w-full h-full object-cover transition duration-500">
+                    <img src="images/hijab-sport.jpeg" alt="Hijab Sport" class="w-full h-full object-cover transition duration-500">
                 </div>
                 <h4 class="font-bold text-lg">Hijab Sport</h4>
                 <p class="text-pink-600 font-bold">Rp 40.000</p>
             </div>
 
-            <div onclick="openModal('Hijab Segi Empat Voal', 'Bahan Voal Ultrafine yang terkenal sangat tegak di dahi dan lembut. Mudah dibentuk tanpa perlu disetrika berlebihan.', 'Rp 35.000', 'Warna pastelnya cantik dan beneran tegak di dahi! - Rini', 'images/segiempat-voal.jpg')" class="product-card group cursor-pointer">
+            <div onclick="openModal('Hijab Segi Empat Voal', 'Bahan Voal Ultrafine yang terkenal sangat tegak di dahi dan lembut. Mudah dibentuk tanpa perlu disetrika berlebihan.', 'Rp 35.000', 'Warna pastelnya cantik dan beneran tegak di dahi! - Rini', 'images/segiempat-voal.jpeg')" class="product-card group cursor-pointer">
                 <div class="aspect-[3/4] rounded-3xl mb-6 overflow-hidden shadow-md bg-slate-200 border-4 border-white">
-                    <img src="images/segiempat-voal.jpg" alt="Segi Empat Voal" class="w-full h-full object-cover transition duration-500">
+                    <img src="images/segiempat-voal.jpeg" alt="Segi Empat Voal" class="w-full h-full object-cover transition duration-500">
                 </div>
                 <h4 class="font-bold text-lg">Hijab Segi Empat Voal</h4>
                 <p class="text-pink-600 font-bold">Rp 35.000</p>
             </div>
 
-            <div onclick="openModal('Hijab Pashmina Viscose', 'Tekstur serat alami yang jatuh (flowy) dan memberikan kesan mewah. Bahan adem dan tidak licin.', 'Rp 45.000', 'Mewah banget pas dipake ke acara kondangan. - Linda', 'images/pashmina-viscose.jpg')" class="product-card group cursor-pointer">
+            <div onclick="openModal('Hijab Pashmina Viscose', 'Tekstur serat alami yang jatuh (flowy) dan memberikan kesan mewah. Bahan adem dan tidak licin.', 'Rp 45.000', 'Mewah banget pas dipake ke acara kondangan. - Linda', 'images/pashmina-viscose.jpeg')" class="product-card group cursor-pointer">
                 <div class="aspect-[3/4] rounded-3xl mb-6 overflow-hidden shadow-md bg-slate-200 border-4 border-white">
-                    <img src="images/pashmina-viscose.jpg" alt="Pashmina Viscose" class="w-full h-full object-cover transition duration-500">
+                    <img src="images/pashmina-viscose.jpeg" alt="Pashmina Viscose" class="w-full h-full object-cover transition duration-500">
                 </div>
                 <h4 class="font-bold text-lg">Hijab Pashmina Viscose</h4>
                 <p class="text-pink-600 font-bold">Rp 45.000</p>
             </div>
 
-            <div onclick="openModal('Hijab Pashmina Ceruty', 'Bahan Ceruty Baby Doll original. Tekstur berpasir halus yang elegan dan sangat cantik untuk layering.', 'Rp 42.000', 'Pashmina ternyaman, koleksi warnanya lengkap. - Bella', 'images/pashmina-ceruty.jpg')" class="product-card group cursor-pointer">
+            <div onclick="openModal('Hijab Pashmina Ceruty', 'Bahan Ceruty Baby Doll original. Tekstur berpasir halus yang elegan dan sangat cantik untuk layering.', 'Rp 42.000', 'Pashmina ternyaman, koleksi warnanya lengkap. - Bella', 'images/pashmina-ceruty.jpeg')" class="product-card group cursor-pointer">
                 <div class="aspect-[3/4] rounded-3xl mb-6 overflow-hidden shadow-md bg-slate-200 border-4 border-white">
-                    <img src="images/pashmina-ceruty.jpg" alt="Pashmina Ceruty" class="w-full h-full object-cover transition duration-500">
+                    <img src="images/pashmina-ceruty.jpeg" alt="Pashmina Ceruty" class="w-full h-full object-cover transition duration-500">
                 </div>
                 <h4 class="font-bold text-lg">Hijab Pashmina Ceruty</h4>
                 <p class="text-pink-600 font-bold">Rp 42.000</p>
@@ -209,8 +209,10 @@
 
             teksHasil.innerHTML = `Kamu akan tampil sempurna dengan <strong>${jenis}</strong> dalam palet <strong>${warna}</strong>.`;
             
+            // Ganti nomor WA berikut dengan nomor Anda
+            const nomorWA = "62812345678"; 
             const pesanWA = `Halo Heavenly Wear! Saya ingin pesan hijab sesuai hasil rekomendasi: ${jenis} dengan warna dari palet ${warna}.`;
-            waLink.href = `https://wa.me/62812345678?text=${encodeURIComponent(pesanWA)}`;
+            waLink.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanWA)}`;
 
             container.classList.remove('hidden');
             container.scrollIntoView({ behavior: 'smooth', block: 'center' });
