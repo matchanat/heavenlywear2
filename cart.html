@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang | Heavenly Wear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'soft-cream': '#FDFCFB', 'soft-beige': '#F3F0EC', 'soft-rose': '#E6DED8', 'elegant-brown': '#8C786A', 'elegant-dark': '#3A3532', } } } }
+    </script>
+</head>
+<body class="bg-soft-cream">
+    <div class="max-w-4xl mx-auto px-6 py-20">
+        <h1 class="text-4xl font-serif mb-12 text-center">Keranjang Belanja</h1>
+        <div id="cart-list" class="space-y-6"></div>
+        <div class="mt-12 p-8 bg-white rounded-3xl border border-soft-beige shadow-sm">
+            <div class="flex justify-between text-2xl font-serif mb-8">
+                <span>Total Estimasi:</span>
+                <span id="cart-total" class="font-bold text-elegant-brown">Rp 0</span>
+            </div>
+            <a href="checkout.html" class="block w-full bg-elegant-dark text-white text-center py-5 rounded-full font-bold tracking-widest hover:bg-elegant-brown transition shadow-xl">LANJUT KE PEMBAYARAN</a>
+        </div>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('heavenly_cart') || '[]');
+        const listDiv = document.getElementById('cart-list');
+        let total = 0;
+
+        if(cart.length === 0) {
+            listDiv.innerHTML = `<p class="text-center italic text-elegant-brown">Keranjang Anda kosong.</p>`;
+        } else {
+            cart.forEach((item, index) => {
+                total += (item.price * item.qty);
+                listDiv.innerHTML += `
+                    <div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-soft-beige">
+                        <div class="flex items-center space-x-6">
+                            <img src="${item.img}" class="w-20 h-20 rounded-xl object-cover">
+                            <div>
+                                <h4 class="font-bold">${item.name}</h4>
+                                <p class="text-xs text-elegant-brown">${item.selectedColor} | Jumlah: ${item.qty}</p>
+                            </div>
+                        </div>
+                        <p class="font-bold">Rp ${(item.price * item.qty).toLocaleString()}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = "Rp " + total.toLocaleString();
+        }
+    </script>
+</body>
+</html>
