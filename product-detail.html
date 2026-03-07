@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk | Heavenly Wear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white">
+    <div id="product-container" class="max-w-7xl mx-auto px-6 py-12">
+        </div>
+
+    <script>
+        const products = {
+            1: { name: "Hijab Sport", price: 40000, img: "images/hijab-sport.jpeg", colors: ["Black", "Grey", "Navy"], desc: "Hijab sport instan dengan bahan Jersey Premium. Dingin, elastis, dan menyerap keringat. Cocok untuk workout, running, maupun harian.", reviews: ["Barang bagus sekali! - Siti", "Beneran adem buat olahraga - Rani"] },
+            2: { name: "Hijab Segi Empat Voal", price: 35000, img: "images/segiempat-voal.jpeg", colors: ["Nude", "Dusty Pink", "Sage"], desc: "Voal premium yang mudah dibentuk, tegak di dahi, dan tidak menerawang. Finishing lasercut yang elegan.", reviews: ["Warna aslinya cantik banget - Linda"] },
+            3: { name: "Hijab Pashmina Viscose", price: 45000, img: "images/pashmina-viscose.jpeg", colors: ["Terracotta", "Olive", "Mustard"], desc: "Bahan viscose crinkle yang memberikan kesan mewah namun tetap kasual. Tidak perlu disetrika (ironless).", reviews: ["Gak perlu ribet setrika, luv! - Dian"] },
+            4: { name: "Hijab Pashmina Ceruty", price: 42000, img: "images/pashmina-ceruty.jpeg", colors: ["Mocca", "Lavender", "Sky Blue"], desc: "Ceruty babydoll berkualitas tinggi. Jatuh (flowy) dan sangat nyaman untuk acara formal maupun daily.", reviews: ["Flowy bgt pashminanya - Tasya"] }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const p = products[id];
+
+        if(p) {
+            document.getElementById('product-container').innerHTML = `
+                <div class="grid md:grid-cols-2 gap-16">
+                    <img src="${p.img}" class="w-full rounded-3xl shadow-2xl">
+                    <div>
+                        <h1 class="text-4xl font-serif mb-4">${p.name}</h1>
+                        <p class="text-2xl text-amber-800 mb-8 font-bold">Rp ${p.price.toLocaleString()}</p>
+                        <div class="mb-8">
+                            <h4 class="font-bold mb-3 uppercase text-xs tracking-widest">Pilihan Warna:</h4>
+                            <div class="flex gap-2">${p.colors.map(c => `<span class="px-4 py-2 border rounded-full text-sm">${c}</span>`).join('')}</div>
+                        </div>
+                        <p class="text-stone-600 leading-relaxed mb-10 text-lg">${p.desc}</p>
+                        <div class="flex gap-4">
+                            <button onclick="addToCart(${id})" class="flex-1 border-2 border-stone-800 py-4 rounded-xl font-bold hover:bg-stone-50 transition uppercase tracking-widest text-sm">Masuk Keranjang</button>
+                            <button onclick="buyNow(${id})" class="flex-1 bg-stone-800 text-white py-4 rounded-xl font-bold hover:bg-stone-700 transition uppercase tracking-widest text-sm">Beli Sekarang</button>
+                        </div>
+                        <div class="mt-16 border-t pt-10">
+                            <h3 class="font-bold mb-6 italic">Ulasan Pelanggan Puas:</h3>
+                            ${p.reviews.map(r => `<p class="mb-4 text-stone-500 border-l-2 border-amber-700 pl-4">"${r}"</p>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addToCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push(products[id]);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Produk berhasil masuk keranjang!');
+            window.location.href = 'cart.html';
+        }
+
+        function buyNow(id) {
+            localStorage.setItem('checkout_item', JSON.stringify(products[id]));
+            window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html>
