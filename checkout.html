@@ -3,66 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment | Heavenly Wear</title>
+    <title>Sistem Pembayaran | Heavenly Wear</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'soft-cream': '#FDFCFB', 'soft-beige': '#F3F0EC', 'soft-rose': '#E6DED8', 'elegant-brown': '#8C786A', 'elegant-dark': '#3A3532', } } } }
+    </script>
 </head>
-<body class="bg-stone-50 py-12 px-6">
-    <div class="max-w-2xl mx-auto bg-white rounded-3xl p-8 shadow-sm">
-        <h2 class="text-2xl font-serif mb-8 border-b pb-4">Checkout System</h2>
+<body class="bg-soft-beige py-20 px-6">
+    <div class="max-w-4xl mx-auto bg-white rounded-[3rem] p-12 shadow-2xl">
+        <h2 class="text-4xl font-serif mb-10 border-b border-soft-beige pb-6">Final Checkout</h2>
         
-        <div id="checkout-detail" class="mb-10 space-y-4">
-            </div>
-
-        <div class="space-y-6">
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Opsi Pengiriman</label>
-                <select class="w-full border p-4 rounded-xl">
-                    <option>JNE - Reguler (Rp 10.000)</option>
-                    <option>J&T - Kilat (Rp 15.000)</option>
-                    <option>Self Pick Up (Gratis)</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Voucher</label>
-                <input type="text" placeholder="Gunakan kode HEAVENLY20" class="w-full border p-4 rounded-xl">
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase mb-2">Metode Pembayaran</label>
-                <div class="grid grid-cols-2 gap-4">
-                    <button class="border p-4 rounded-xl hover:border-amber-700">Bank Transfer</button>
-                    <button class="border p-4 rounded-xl hover:border-amber-700 font-bold text-blue-600">GoPay / QRIS</button>
+        <div class="grid md:grid-cols-2 gap-16">
+            <div class="space-y-8">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-elegant-brown mb-4">Metode Pengiriman</label>
+                    <select class="w-full bg-soft-cream border border-soft-beige p-4 rounded-2xl outline-none focus:ring-2 focus:ring-soft-rose">
+                        <option>JNE - Express (Rp 15.000)</option>
+                        <option>SiCepat - Reguler (Rp 10.000)</option>
+                        <option>J&T - Hemat (Rp 7.000)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-elegant-brown mb-4">Metode Pembayaran</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="p-4 border border-soft-rose rounded-2xl text-sm font-bold hover:bg-elegant-dark hover:text-white">QRIS / E-WALLET</button>
+                        <button class="p-4 border border-soft-rose rounded-2xl text-sm font-bold hover:bg-elegant-dark hover:text-white">BANK TRANSFER</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-elegant-brown mb-4">Voucher</label>
+                    <input type="text" placeholder="Masukkan kode voucher" class="w-full bg-soft-cream border border-soft-beige p-4 rounded-2xl">
                 </div>
             </div>
-        </div>
 
-        <div class="mt-12 bg-stone-50 p-6 rounded-2xl">
-            <div class="flex justify-between mb-2"><span>Subtotal</span> <span id="subtotal">Rp 0</span></div>
-            <div class="flex justify-between mb-2"><span>Biaya Kirim</span> <span>Rp 10.000</span></div>
-            <div class="flex justify-between font-bold text-xl mt-4 border-t pt-4"><span>Total Tagihan</span> <span id="total">Rp 0</span></div>
+            <div class="bg-soft-cream p-8 rounded-[2rem] border border-soft-beige">
+                <h3 class="text-xl font-serif mb-6 italic text-elegant-dark">Rincian Pembayaran</h3>
+                <div id="checkout-items" class="space-y-3 text-sm mb-6 border-b border-soft-rose pb-6"></div>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between"><span>Subtotal:</span> <span id="subtotal">Rp 0</span></div>
+                    <div class="flex justify-between"><span>Biaya Kirim:</span> <span>Rp 10.000</span></div>
+                    <div class="flex justify-between font-bold text-lg mt-4 text-elegant-dark"><span>Total Akhir:</span> <span id="grandtotal">Rp 0</span></div>
+                </div>
+                <button onclick="confirmPurchase()" class="w-full bg-elegant-dark text-white py-5 rounded-full mt-10 font-bold tracking-[0.2em] text-xs hover:bg-elegant-brown shadow-xl transition">KONFIRMASI PEMBELIAN</button>
+            </div>
         </div>
-
-        <button onclick="confirmPurchase()" class="w-full bg-amber-800 text-white py-5 rounded-2xl mt-10 font-bold uppercase tracking-widest hover:bg-amber-900 shadow-xl transition">
-            Konfirmasi & Bayar Sekarang
-        </button>
     </div>
 
     <script>
-        const item = JSON.parse(localStorage.getItem('checkout_item'));
-        if(item) {
-            document.getElementById('checkout-detail').innerHTML = `
-                <div class="flex justify-between items-center">
-                    <span class="font-bold">${item.name}</span>
-                    <span>Rp ${item.price.toLocaleString()}</span>
-                </div>
-            `;
-            document.getElementById('subtotal').innerText = `Rp ${item.price.toLocaleString()}`;
-            document.getElementById('total').innerText = `Rp ${(item.price + 10000).toLocaleString()}`;
-        }
+        const cart = JSON.parse(localStorage.getItem('heavenly_cart') || '[]');
+        const checkDiv = document.getElementById('checkout-items');
+        let total = 0;
+
+        cart.forEach(item => {
+            total += (item.price * item.qty);
+            checkDiv.innerHTML += `<div class="flex justify-between"><span>${item.name} x${item.qty}</span> <span>Rp ${(item.price * item.qty).toLocaleString()}</span></div>`;
+        });
+
+        document.getElementById('subtotal').innerText = "Rp " + total.toLocaleString();
+        document.getElementById('grandtotal').innerText = "Rp " + (total + 10000).toLocaleString();
 
         function confirmPurchase() {
-            if(confirm("Apakah Anda yakin ingin membeli produk ini?")) {
-                alert("Terima kasih! Pesanan Anda sedang diproses. Silakan selesaikan pembayaran sesuai instruksi.");
-                localStorage.removeItem('checkout_item');
+            if(confirm("Apakah Anda sudah yakin dengan pesanan ini? Pesanan akan segera diproses.")) {
+                alert("Pesanan berhasil dibuat! Terima kasih telah berbelanja di Heavenly Wear.");
+                localStorage.removeItem('heavenly_cart');
                 window.location.href = 'index.html';
             }
         }
